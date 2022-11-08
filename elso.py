@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.stats import norm
 from matplotlib import pyplot as plt
-
+import pandas as pd
 from hatodikgyak import Option
 from hatodikgyak import GBrownianPath
 K = 360
@@ -75,3 +75,15 @@ for (t,S) in zip(times, spots1): #Ez a zip párokon iterál végig (t,S) párok 
 
 plt.plot(times,np.array(prices))
 plt.show()
+
+df = pd.DataFrame({"time":times, "spot": spots1})
+
+K=100
+def calcPrice(row): #time és spotból árat számol
+    opt = Option("C", K, None, 1 )
+    vola = 0.3
+    return opt.calcPrice(row.spot, 1-row.time,vola,0)
+
+df['price']= df.apply(calcPrice, axis=1)
+
+print(df)
