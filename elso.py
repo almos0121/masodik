@@ -77,7 +77,7 @@ plt.plot(times,np.array(prices))
 plt.show()
 
 df = pd.DataFrame({"time":times, "spot": spots1})
-
+#2022,11,08
 K=100
 def calcPrice(row): #time és spotból árat számol
     opt = Option("C", K, None, 1 )
